@@ -8,8 +8,8 @@
 
 provider "aws" {
   region = "us-east-1"
-  access_key = "AKIAZXT5EJO54A7BMHWT"
-  secret_key = "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"
+  access_key = ""
+  secret_key = ""
 }
 
 resource "aws_instance" "terraform-web-server-instance" {
@@ -23,13 +23,6 @@ resource "aws_instance" "terraform-web-server-instance" {
     network_interface_id = aws_network_interface.terraform-network-interface.id
   }
 
-  user_data = <<-EOF
-              #!/bin/bash
-              sudo apt update -y
-              sudo apt install apache2 -y
-              sudo systemctl start apache2
-              sudo bash -c 'echo your very first web server > /var/www/html/index.html'
-              EOF
   tags = {
     Name = "terraform-web-server"
   }
